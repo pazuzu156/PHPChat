@@ -12,6 +12,10 @@
 <body>
 	<h1>My Awesome Chat App</h1>
 	@yield('content')
-	<p class="footer">Client &copy; {{ date('Y') }} <a href="http://www.kalebklein.com" target="_blank">Kaleb Klein</a> - All Rights Reserved</p>
+	<p class="footer">
+		Client &copy; {{ date('Y') }} <a href="http://www.kalebklein.com" target="_blank">Kaleb Klein</a> - All Rights Reserved
+		<br>
+		Source code available on <a href="https://github.com/pazuzu156/PHPChat">GitHub</a> under GPL v2 Licence.
+	</p>
 </body>
 </html>
