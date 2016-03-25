@@ -10,7 +10,7 @@
 		<p class="version">Client v{{ config()->get('version') }}</p>
 		<div id="menu">
 			<p class="welcome">Welcome <strong>{{ user()->username }}</strong>!</p>
-			<p class="nav"><a href="#kb-init">Preferences</a> | <a href="{{ get_url('users.logout') }}">Logout</a></p>
+			<p class="nav"><a href="#prefs-form" rel="modal:open">Preferences</a> | <a href="{{ get_url('users.logout') }}">Logout</a></p>
 			<div style="clear:both;"></div>
 		</div>
 		<div id="chatbox"></div>
@@ -51,8 +51,11 @@
 			<a href="#" id="clear">Clear Chat History</a>
 		@endif
 	</div>
-	<div name="kb-modal" title="Preferences">
-		<p>Not in working order yet!</p>
-	</div>
+	<form method="post" action="#" class="modal" id="prefs-form" style="display:none;">
+		<p>Set the color to display your username as. <small>(Uses HEX color value)</small></p>
+		<label for="color">Username Color: #</label>
+		<input type="text" name="color" id="color" value="{{ str_replace('#', '', prefs()->username_color) }}">
+		<input type="submit" name="submitprefs" id="submitprefs" value="Save" rel="modal:close">
+	</form>
 	
 @stop

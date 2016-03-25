@@ -1,0 +1,16 @@
+<?php if($log = api_get_log()): ?>
+	<?php foreach($log->results() as $msgln): ?>
+		<?php $prefs = \Core\Database::init()->get('prefs', ['username', '=', user()->username]) ?>
+		<div class="msgln">
+			(<?php echo carbon_date($msgln->posttime)->toDateTimeString(); ?>)
+			<b>
+				<span style="color:<?php echo prefs($msgln->username)->username_color; ?>;">
+					<?php echo $msgln->username; ?>
+
+				</span>
+			</b>: <?php echo api_parse_log($msgln->message); ?>
+
+			<br/>
+		</div>
+	<?php endforeach; ?>
+<?php endif; ?>

@@ -44,6 +44,22 @@ $(function()
 		}
 	});
 
+	$("#submitprefs").click(function(e)
+	{
+		e.preventDefault();
+
+		$.ajax({
+			type: 'post',
+			url: 'api.prefs',
+			data: {user: $("#username").val(), color: $("#color").val()},
+			dataType: 'html',
+			success: function(data, status, xhr)
+			{
+				alert(data);
+			}
+		});
+	});
+
 	setInterval(apiLoadLog, 1000);
 	setInterval(apiLoadUsers, 1000);
 });

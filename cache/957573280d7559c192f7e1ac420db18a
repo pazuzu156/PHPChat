@@ -1,0 +1,13 @@
+<p style="text-align:center;text-decoration:underline;font-weight:bold">
+	Online Users
+</p>
+
+<?php if($users = api_get_users()): ?>
+	<?php foreach($users->results() as $user): ?>
+		<?php if($user->admin): ?>
+			<?php echo $user->username; ?> (Admin)<br>
+		<?php else: ?>
+			<?php echo $user->username; ?><br>
+		<?php endif; ?>
+	<?php endforeach; ?>
+<?php endif; ?>

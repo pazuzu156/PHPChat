@@ -1,0 +1,47 @@
+<?php $__env->startSection('content'); ?>
+
+	<?php if(session_has('chat_login')): ?>
+		<?php echo redir(''); ?>
+
+	<?php endif; ?>
+
+	<?php if(input_get('login')): ?>
+		<?php echo login_user(); ?>
+
+	<?php endif; ?>
+
+	<div id="loginform">
+		<form action="<?php echo get_url('users.login'); ?>" method="post" autocomplete="off">
+			<span class="version">Client v <?php echo config()->get('version'); ?></span>
+			<table align="center">
+				<?php if(session_has('emsg')): ?>
+					<tr>
+						<td colspan="2">
+							<span class="error"><?php echo flash('emsg'); ?></span>
+						</td>
+					</tr>
+				<?php elseif(session_has('smsg')): ?>
+					<tr>
+						<td colspan="2">
+							<span class="success"><?php echo flash('smsg'); ?></span>
+						</td>
+					</tr>
+				<?php endif; ?>
+				<tr>
+					<td><label for="username">Username:</label></td>
+					<td><input type="text" id="username" name="username"></td>
+				</tr>
+				<tr>
+					<td><label for="password">Password:</label></td>
+					<td><input type="password" id="password" name="password"></td>
+				</tr>
+				<tr>
+					<td><input type="submit" name="login" value="Login" id="login"></td>
+					<td><a href="<?php echo get_url('users.register'); ?>">Register</a></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Chat V3</title>
+	<?php echo style('style.css'); ?>
+
+	<?php echo style('jquery.modal.css'); ?>
+
+	<?php echo script('jquery.min.js'); ?>
+
+	<?php echo script('jquery.modal.min.js'); ?>
+
+	<?php echo script('chat.js'); ?>
+
+</head>
+<body>
+	<h1>My Awesome Chat App</h1>
+	<?php echo $__env->yieldContent('content'); ?>
+	<p class="footer">
+		Client &copy; <?php echo date('Y'); ?> <a href="http://www.kalebklein.com" target="_blank">Kaleb Klein</a> - All Rights Reserved
+		<br>
+		Source code available on <a href="https://github.com/pazuzu156/PHPChat" target="_blank">GitHub</a> under GPL v2 Licence.
+	</p>
+</body>
+</html>

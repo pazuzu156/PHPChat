@@ -144,14 +144,25 @@ if(!function_exists('register_user'))
 
 		if($valid)
 		{
+			$admin = false;
+
+			$db->get('users');
+			if($db->count() == 0)
+				$admin = true;
+
 			$db->insert('users', [
 				'username' => input_get('username'),
 				'password' => hash_make(input_get('password')),
-				'name' => input_get('name')
+				'name' => input_get('name'),
+				'admin' => $admin
 			]);
 
 			if(!$db->error())
 			{
+				$db->insert('prefs', [
+					'username' => input_get('username'),
+					'username_color' => '#000000',
+				]);
 				flash('smsg', 'You have successfully registered!');
 			}
 			else
@@ -179,14 +190,23 @@ if(!function_exists('login_user'))
 			if($user->count())
 			{
 				$user = $user->first();
-				if(hash_check(input_get('password'), $user->password))
+				if($user->online)
 				{
-					session_set('chat_login', $user->username);
-					redir('');
+					flash('emsg', 'A user by that name is already logged in!');
 				}
 				else
 				{
-					flash('emsg', 'Invalid password!');
+					$db->update('users', $user->id,['online' => true]);
+					if(hash_check(input_get('password'), $user->password))
+					{
+						session_set('chat_login', $user->username);
+						api_push(['user' => '', 'msg' => $user->username . ' has logged in!']);
+						redir('');
+					}
+					else
+					{
+						flash('emsg', 'Invalid password!');
+					}
 				}
 			}
 			else
@@ -205,6 +225,9 @@ if(!function_exists('logout_user'))
 {
 	function logout_user()
 	{
+		$db = \Core\Database::init();
+		$db->update('users', user()->id, ['online' => false]);
+		api_push(['user' => '', 'msg' => user()->username . ' has logged out!']);
 		session_delete('chat_login');
 		redir('');
 	}
@@ -217,6 +240,25 @@ if(!function_exists('user'))
 		$db = \Core\Database::init();
 
 		return $db->get('users', ['username', '=', session_get('chat_login')])->first();
+	}
+}
+
+if(!function_exists('prefs'))
+{
+	function prefs($username='', $returnDB=false)
+	{
+		if(empty($username))
+			$username = user()->username;
+
+		$db = \Core\Database::init();
+		$db->get('prefs', ['username', '=', $username]);
+
+		$user = $db->first();
+
+		if($returnDB)
+			return $db;
+		else
+			return $user;
 	}
 }
 
@@ -267,7 +309,7 @@ if(!function_exists('api_get_users'))
 	function api_get_users()
 	{
 		$db = \Core\Database::init();
-		return $db->get('users');
+		return $db->get('users', ['online', '=', '1']);
 	}
 }
 

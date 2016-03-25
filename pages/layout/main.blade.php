@@ -4,10 +4,10 @@
 	<meta charset="UTF-8" />
 	<title>Chat V3</title>
 	{{ style('style.css') }}
-	{{ style('kbox.css') }}
+	{{ style('jquery.modal.css') }}
 	{{ script('jquery.min.js') }}
-	{{ script('kbox.min.js') }}
-	{{ script('chat.min.js') }}
+	{{ script('jquery.modal.min.js') }}
+	{{ script('chat.js') }}
 </head>
 <body>
 	<h1>My Awesome Chat App</h1>
