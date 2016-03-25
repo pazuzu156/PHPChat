@@ -1,0 +1,78 @@
+body {
+	font:12px arial;
+	color:#222;
+}
+
+from, p, span {
+	margin:0;
+	padding:0;
+}
+
+input { font:12px arial; }
+
+a {
+	color:#0000FF;
+	text-decoration:none;
+}
+
+a:hover { text-decoration:underline; }
+
+h1 { text-align:center; }
+
+img { border:none; }
+
+#wrapper {
+	margin:0 auto;
+	width:650px;
+	background-color:#EBF4FB;
+	border:1px solid #ACD8F0;
+	padding:25px;
+}
+
+#loginform {
+	margin:0 auto;
+	padding:25px;
+	background-color:#EBF4FB;
+	border:1px solid #ACD8F0;
+	width:400px;
+}
+
+#chatbox {
+	padding:10px;
+	background:#FFF;
+	height:270px;
+	width:430px;
+	border:1px solid #ACD8F0;
+	overflow:auto;
+	margin-bottom:25px;
+	float:left;
+}
+
+#users {
+	padding:10px;
+	background:#FFF;
+	height:270px;
+	width:140px;
+	float:right;
+	border:1px solid #ACD8F0;
+}
+#usermsg {
+	width:395px;
+	border:1px solid #ACD8F0;
+}
+
+#sendForm { float:left; }
+
+.welcome { float:left; }
+
+.nav { float:right; }
+
+.msgln { margin:0 0 2px 0; }
+
+.version { font-size:9pt; color:#999; text-align:center; }
+
+.footer { text-align:center; }
+
+.error { color:red; }
+
+.success { color: green; }
