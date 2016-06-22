@@ -4,7 +4,7 @@
 		<div class="msgln">
 			({{ carbon_date($msgln->posttime)->toDateTimeString() }})
 			<b>
-				<span style="color:{{ prefs($msgln->username)->username_color }};">
+				<span style="color:#{{ prefs($msgln->username)->username_color }};">
 					{{ $msgln->username }}
 				</span>
 			</b>: {{ api_parse_log($msgln->message) }}
